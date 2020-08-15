@@ -1,0 +1,9 @@
+* {
+    transition: 1s;
+    background-color: #0f00ff;
+}
+body,html {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(250, 221, 221);
+}
