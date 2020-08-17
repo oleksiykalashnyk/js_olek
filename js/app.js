@@ -1,46 +1,39 @@
 "use strict";
-//Start lean function
+//Start lean METHODs strings and numbers
 
 
-// Function declaration
+//Method for STRINGs
 
-function showFirstMassege(text) {
-    console.log(text);
-}
+const arr = [1,5,6];
+console.log(arr.length);
 
-function calc(a, b) {
-    return (a + b);
-}
+const str = "Olek";
+console.log(str.length);
+console.log(str[1]);
 
-showFirstMassege("Hel1lo");
-
-console.log(calc(4, 5));
-console.log(calc(5, 9));
+console.log(str.toLowerCase());
+console.log(str.toUpperCase());
 
 
-//Function expresssion
+const fruit = "Some fruit";
 
-const longet = function () {
-    console.log("Hello");
-};
+console.log(fruit.indexOf("fruit"))
 
-longet();
+const log = "123456789";
 
+console.log(log.slice(0,5));
+//12345
 
-//Arrow function
-
-const calcArrow1 = (a, b) => a + b;
-//Or next type
-const calcArrow2 = (a, b) => {return a + b};
-//Or Arrow functions for more options
-const calcArrow3 = (a, b) => {
-    const x = a ** b;
-    const z = a + b;
-    return x+z;
-
-}
+console.log(log.slice(5));
+//6789
 
 
-console.log(calcArrow1(2, 3));
-console.log(calcArrow2(5, 7));
-console.log(calcArrow3(4, 12));
+//Method for NUMBERs
+
+const num = 12.5;
+console.log(Math.round(num));
+
+const test = "12.54px";
+
+console.log(parseInt(test));
+console.log(parseFloat(test));
