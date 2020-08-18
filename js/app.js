@@ -1,60 +1,62 @@
 "use strict";
-//Learn Object
+//Learn Massive and PsevdoMassive
 
-//Обьявление объекта
-const options = {
-    name: "test",
-    width: 1024,
-    height: 900,
-    colors: {
-        border: 'black',
-        background: 'red'
-    },
-    makeTest: function () {
-        console.log("test");
-    }
-};
-console.log(options.name);
+//Создаем массив
+let arr = [4, 6, 1, 2, 3, 5, 8];
 
-//Удалим свойство объекта
-delete options.name;
-console.log(options.name);
+//Удаляем последний елемент массива
+arr.pop();
 
-//Снова добавим свойство объекта
-options.name = 'Olek';
-console.log(options.name);
+//Добавляем к концу массива елемент
+arr.push(11);
 
-//Цыкл по объекту с выводом свойств
-for (let key in options) {
-    console.log(`Свойство ${key} имеет значение ${options[key]}`);
+//Выводим наш массив
+console.log(arr);
+
+//Перебираем массив классичиским методом через FOR
+for (let i = 0; i < arr.length; i++) {
+    console.log(arr[i]);
 }
 
-//Цыкл по объекту с проверкой на Объект!!!
-for (let key in options) {
-    if (typeof (options[key]) === "object") {
-        for (let i in options[key]) {
-            console.log(`Свойство ${i} имеет значение ${options[key][i]}`);
-        }
-    } else {
-        console.log(`Свойство ${key} имеет значение ${options[key]}`);
-    }
+//Перебираем массив новым методом через FOR OF
+for (let i of arr) {
+    console.log(i);
 }
 
-//Использование методов для работы с объектами
-console.log(Object.keys(options).length);
+//// .length Массива всегда будет равна индексу последнего елемента массива плюс один
+arr[99] = 0;
+console.log(arr.length);
 
-//Простой цыкл вывода названий методов и свойств объекта с помощью глобального метода работы с объектами Object.keys
-let objValues = Object.keys(options);
-for (let i = 0; i < objValues.length; i++) {
-    console.log((i + 1) + " = " + objValues[i]);
+// Обьявим 99й елемент массива "0" и пробуем его показать посмотрим длину массива и сам массив
+console.log(arr.length);
+console.log(arr);
+
+//forEach медод массива который может принимать callback функцию с 3 переменными 
+//1е - значение елемента массива
+//2е - номер елемента массива
+//3е - массив который мы используем 
+arr.forEach(function (item, i, arr) {
+    console.log(`Елемен массива ${i} который стоит на месте ${i} внутри массива ${arr}`);
+});
+
+//Формируем массив на основании строки
+const str = prompt("", "");
+const product = str.split(", ");
+console.log(product);
+
+//Сортируем наш массив
+//.sort() сортирует всё как СТРОКИ!!!!
+console.log(product.sort());
+
+//Формируем строку на основании массива
+console.log(product.join(": "));
+
+//Сортируем числа с помощью функции которая заменяет алгорим действия .sort()
+arr.sort();
+console.log(arr);
+
+function sortNumber(a, b) {
+    return a - b;
 }
-
-//Запускаем свой личный метод с объкта
-options.makeTest();
-
-//Деструкторизация обьекта
-const {border, background} = options.colors;
-console.log(border);
-
-//Посмотрим все встроеные методы строки
-console.dir(String);
+arr.sort(sortNumber);
+console.log(arr);
