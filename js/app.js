@@ -1,5 +1,5 @@
 "use strict";
-//Lean IF/ELSE/SWITCH
+//Learn IF/ELSE/SWITCH
 if (4 == 5) {
     console.log('Ok!');
 } else {
