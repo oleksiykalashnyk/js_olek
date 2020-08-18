@@ -1,5 +1,5 @@
 "use strict";
-//Start lean METHODs strings and numbers
+//Start learn METHODs strings and numbers
 
 
 //Method for STRINGs
