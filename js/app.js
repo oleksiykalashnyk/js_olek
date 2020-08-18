@@ -22,3 +22,4 @@ console.log(copy);
 console.log(obj);
 
 //Пауза на 6:03
+//ok
