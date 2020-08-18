@@ -1,5 +1,5 @@
 "use strict";
-//Start lean function
+//Start learn function
 
 
 // Function declaration
