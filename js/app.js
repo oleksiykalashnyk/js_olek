@@ -1,5 +1,5 @@
 "use strict";
-//Start lean function CALLBACK
+//Start learn function CALLBACK
 
 function learnJS(lang, callback) {
     console.log(`Я учу ${lang}`);
