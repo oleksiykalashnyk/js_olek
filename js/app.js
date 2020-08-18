@@ -1,5 +1,5 @@
 "use strict";
-//while(){}
+//Learn while(){} and other 
 
 // let num = 50;
 // while (num <= 55) {
