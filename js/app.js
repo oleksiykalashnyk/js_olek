@@ -31,14 +31,15 @@ longet();
 
 const calcArrow1 = (a, b) => a + b;
 //Or next type
-const calcArrow2 = (a, b) => {return a + b};
+const calcArrow2 = (a, b) => {return a + b;};
+
 //Or Arrow functions for more options
 const calcArrow3 = (a, b) => {
     const x = a ** b;
     const z = a + b;
     return x+z;
 
-}
+};
 
 
 console.log(calcArrow1(2, 3));
