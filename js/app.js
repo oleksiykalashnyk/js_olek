@@ -32,7 +32,7 @@ const personalMovieDB = {
                 --i;
             }
         }
-        
+
         for (let i in personalMovieDB.movies) {
             console.log(`${i} = ${personalMovieDB.movies[i]}`);
         }
