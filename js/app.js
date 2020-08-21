@@ -102,4 +102,5 @@ const personalMovieDB = {
     }
 
 };
+
 personalMovieDB.start(personalMovieDB.detectPersonalLevel, personalMovieDB.rememberMyFilms);
