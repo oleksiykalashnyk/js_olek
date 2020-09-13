@@ -24,8 +24,9 @@ const movieDB = {
         "Скотт Пилигрим против...",
         "Дом3",
         "Ksu",
-        "вывыв"
-        
+        "вывыв",
+        "AAAAAAAAAAAAAAAAAAAA"
+
     ]
 };
 
@@ -40,12 +41,16 @@ let editBg = document.querySelector(".promo__bg");
 editBg.style.backgroundImage = "url(img/bg.jpg)";
 
 let listFilms = document.querySelector(".promo__interactive-list");
-let delDiv = document.createElement("div");
-delDiv.classList.add("delete");
+
 movieDB.movies.sort().forEach((item, i) => {
+
     let newEl = document.createElement("li");
     newEl.classList.add("promo__interactive-item");
-    newEl.append(delDiv);
-    newEl.innerHTML = i+1 + " " + item;
+    
+    let delDiv = document.createElement("div");
+    delDiv.classList.add("delete");
+    
+    newEl.innerHTML = i + 1 + " " + item;
     listFilms.append(newEl);
+    newEl.append(delDiv);
 });
