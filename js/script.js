@@ -1,56 +1,87 @@
-/* Задания на урок:
-
-1) Удалить все рекламные блоки со страницы (правая часть сайта)
-
-2) Изменить жанр фильма, поменять "комедия" на "драма"
-
-3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
-Реализовать только при помощи JS
-
-4) Список фильмов на странице сформировать на основании данных из этого JS файла.
-Отсортировать их по алфавиту 
-
-5) Добавить нумерацию выведенных фильмов */
-
 'use strict';
 
-const movieDB = {
-    movies: [
-        "Логан",
-        "Пила",
-        "Лига справедливости",
-        "Ла-ла лэнд",
-        "Одержимость",
-        "Скотт Пилигрим против...",
-        "Дом3",
-        "Ksu",
-        "вывыв",
-        "AAAAAAAAAAAAAAAAAAAA"
-
-    ]
-};
+document.querySelector(".promo__adv").remove();
 
 
-let addBlock = document.querySelector(".promo__adv");
-addBlock.remove();
+let arr = [],
 
-let catName = document.querySelector(".promo__genre");
-catName.innerHTML = "драма";
+    buttonClick = document.querySelector(".add"),
+    buttonX = buttonClick.querySelector("button"),
 
-let editBg = document.querySelector(".promo__bg");
-editBg.style.backgroundImage = "url(img/bg.jpg)";
+    promoList = document.querySelector(".promo__interactive-list"),
+    liEls = promoList.getElementsByTagName("li"),
 
-let listFilms = document.querySelector(".promo__interactive-list");
 
-movieDB.movies.sort().forEach((item, i) => {
+    getAllLi = () => {
+        for (let i = 1; i <= liEls.length; i++) {
+            let x = liEls[i - 1].innerText;
+            arr.push(x);
+        }
+    },
 
-    let newEl = document.createElement("li");
-    newEl.classList.add("promo__interactive-item");
-    
-    let delDiv = document.createElement("div");
-    delDiv.classList.add("delete");
-    
-    newEl.innerHTML = i + 1 + " " + item;
-    listFilms.append(newEl);
-    newEl.append(delDiv);
-});
+    removeLi = () => {
+        let liList = promoList.querySelectorAll("li");
+        for (let i = 1; i <= liList.length; i++) {
+            liList[i - 1].remove();
+        }
+    },
+
+    setLi = () => {
+        getAllLi();
+        removeLi();
+        arr.sort();
+
+        for (let i = 0; i < arr.length; i++) {
+            let newEl = document.createElement("li");
+            newEl.classList.add("promo__interactive-item");
+            newEl.innerText = arr[i];
+            promoList.append(newEl);
+
+            let newDelEl = document.createElement("div");
+            newDelEl.classList.add("delete");
+            newEl.append(newDelEl);
+            addListenDel();
+        }
+    },
+
+    getInput = (evt) => {
+        evt.preventDefault();
+        let inputInPage = document.querySelector(".adding__input");
+
+        if (inputInPage.value != "") {
+            arr.push(inputInPage.value);
+            arr.sort();
+            inputInPage.value = "";
+            inputInPage.placeholder = "Что нибуть ещё?";
+        }
+        setLi();
+        arr.length = 0;
+    },
+
+    listenDel = (x) => {
+        x.onclick = function (e) {
+            let clickBlock = e.target;
+            let parentText = clickBlock.offsetParent.innerText;
+
+            getAllLi();
+            removeLi();
+
+            let nubInArr = arr.indexOf(parentText);
+            arr.splice(nubInArr, 1);
+
+            setLi();
+            arr.length = 0;
+        };
+
+    },
+    addListenDel = () => {
+        let allDelBut = document.querySelectorAll(".delete");
+
+        allDelBut.forEach(item => {
+            item.addEventListener('click', listenDel(item), false);
+        });
+    };
+
+
+    addListenDel();
+    buttonX.addEventListener('click', getInput);
