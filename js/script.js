@@ -23,9 +23,9 @@ const movieDB = {
         "Одержимость",
         "Скотт Пилигрим против...",
         "Дом3",
-        "Ksu",
         "вывыв",
-        "AAAAAAAAAAAAAAAAAAAA"
+        "A",
+        "Б"
 
     ]
 };
@@ -42,15 +42,24 @@ editBg.style.backgroundImage = "url(img/bg.jpg)";
 
 let listFilms = document.querySelector(".promo__interactive-list");
 
-movieDB.movies.sort().forEach((item, i) => {
+//Я думаю так более практичнее, но кто я такой?
+// movieDB.movies.sort().forEach((item, i) => {
 
-    let newEl = document.createElement("li");
-    newEl.classList.add("promo__interactive-item");
-    
-    let delDiv = document.createElement("div");
-    delDiv.classList.add("delete");
-    
-    newEl.innerHTML = i + 1 + " " + item;
-    listFilms.append(newEl);
-    newEl.append(delDiv);
+//     let newEl = document.createElement("li");
+//     newEl.classList.add("promo__interactive-item");
+
+//     let delDiv = document.createElement("div");
+//     delDiv.classList.add("delete");
+
+//     newEl.innerHTML = i + 1 + " " + item;
+//     listFilms.append(newEl);
+//     newEl.append(delDiv);
+// });
+
+movieDB.movies.sort().forEach((item, i) => {
+    listFilms.innerHTML += `
+    <li class="promo__interactive-item">${i+1} ${item}
+        <div class="delete"></div>
+    </li>
+    `;
 });
