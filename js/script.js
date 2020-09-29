@@ -1,4 +1,4 @@
-/* Задания на урок:
+/* Задания на урок 1:
 
 1) Удалить все рекламные блоки со страницы (правая часть сайта)
 
@@ -12,54 +12,117 @@
 
 5) Добавить нумерацию выведенных фильмов */
 
+////////////////////////////////////////////////////////////
+
+/* Задания на урок 2:
+
+1) Реализовать функционал, что после заполнения формы и нажатия кнопки "Подтвердить" - 
+новый фильм добавляется в список. Страница не должна перезагружаться.
+Новый фильм должен добавляться в movieDB.movies.
+Для получения доступа к значению input - обращаемся к нему как input.value;
+P.S. Здесь есть несколько вариантов решения задачи, принимается любой, но рабочий.
+
+2) Если название фильма больше, чем 21 символ - обрезать его и добавить три точки
+
+3) При клике на мусорную корзину - элемент будет удаляться из списка (сложно)
+
+4) Если в форме стоит галочка "Сделать любимым" - в консоль вывести сообщение: 
+"Добавляем любимый фильм"
+
+5) Фильмы должны быть отсортированы по алфавиту */
 'use strict';
 
-const movieDB = {
-    movies: [
-        "Логан",
-        "Пила",
-        "Лига справедливости",
-        "Ла-ла лэнд",
-        "Одержимость",
-        "Скотт Пилигрим против...",
-        "Дом3",
-        "вывыв",
-        "A",
-        "Б"
+document.addEventListener("DOMContentLoaded", () => {
 
-    ]
-};
+    /////////////////////////////////////////////
+    // Part 1
+    /////////////////////////////////////////////
 
+    const
+        movieDB = {
+            movies: [
+                "Логан",
+                "Пила",
+                "Лига справедливости",
+                "Ла-ла лэнд",
+                "Одержимость"
 
-let addBlock = document.querySelector(".promo__adv");
-addBlock.remove();
+            ]
+        },
 
-let catName = document.querySelector(".promo__genre");
-catName.innerHTML = "драма";
+        addBlock = document.querySelectorAll(".promo__adv img"),
+        listFilms = document.querySelector(".promo__interactive-list"),
+        catName = document.querySelector(".promo__genre"),
+        editBg = document.querySelector(".promo__bg"),
 
-let editBg = document.querySelector(".promo__bg");
-editBg.style.backgroundImage = "url(img/bg.jpg)";
+        makeChenges = () => {
+            editBg.style.backgroundImage = "url(img/bg.jpg)";
+            catName.innerHTML = "драма";
+        },
 
-let listFilms = document.querySelector(".promo__interactive-list");
+        deleteAvd = (arr) => {
+            arr.forEach(item => {
+                item.remove();
+            });
+        },
 
-//Я думаю так более практичнее, но кто я такой?
-// movieDB.movies.sort().forEach((item, i) => {
+        sortArr = (arr) => {
+            arr.sort();
+        },
 
-//     let newEl = document.createElement("li");
-//     newEl.classList.add("promo__interactive-item");
+        createMovieList = (films, perent) => {
+            perent.innerHTML = "";
+            sortArr(films);
+            films.forEach((item, i) => {
+                perent.innerHTML += `
+            <li class="promo__interactive-item">${i+1} ${item}
+                <div class="delete"></div>
+            </li>
+            `;
+            });
 
-//     let delDiv = document.createElement("div");
-//     delDiv.classList.add("delete");
+            document.querySelectorAll(".delete").forEach((btn, i) => {
+                btn.addEventListener("click", () => {
+                    btn.parentElement.remove();
+                    movieDB.movies.splice(i, 1);
+                    createMovieList(films, perent);
+                });
+            });
+        };
 
-//     newEl.innerHTML = i + 1 + " " + item;
-//     listFilms.append(newEl);
-//     newEl.append(delDiv);
-// });
+    makeChenges();
+    deleteAvd(addBlock);
+    createMovieList(movieDB.movies, listFilms);
 
-movieDB.movies.sort().forEach((item, i) => {
-    listFilms.innerHTML += `
-    <li class="promo__interactive-item">${i+1} ${item}
-        <div class="delete"></div>
-    </li>
-    `;
+    /////////////////////////////////////////////
+    // Part 2
+    /////////////////////////////////////////////
+
+    const
+        addForm = document.querySelector('form.add'),
+        addInput = addForm.querySelector('.adding__input'),
+        checkBox = addForm.querySelector('[type="checkbox"]');
+
+    addForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        let newFilm = addInput.value;
+        const favorite = checkBox.cheched;
+
+        if (newFilm) {
+
+            if (newFilm.length > 21) {
+                newFilm = `${newFilm.substring(0,22)}...`;
+            }
+
+            if(checkBox){
+                console.log("add");
+            }
+
+            movieDB.movies.push(newFilm);
+            createMovieList(movieDB.movies, listFilms);
+        }
+
+        event.target.reset();
+    });
 });
