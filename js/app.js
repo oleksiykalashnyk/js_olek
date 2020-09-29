@@ -65,3 +65,13 @@ link.addEventListener("click", event => {
     event.preventDefault();
     console.log(event.target);
 });
+
+
+//7. event options - once -> only one Event 
+
+link.addEventListener("click", event => {
+    event.preventDefault();
+    console.log("One click");
+}, {
+    once: true
+});
