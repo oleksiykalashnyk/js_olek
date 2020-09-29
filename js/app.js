@@ -1,60 +1,42 @@
 "use strict";
-//Start work for DOM Elements in the Page 
+//Start work for mobile Events
 
-//1. body
+//1. touchstart
+//2. touchmove
+//3. touchend
+//4. touchenter
+//5. touchleave
+//6. touchscancel
 
-console.log(document.body);
-
-//2. All NODE childs inside body
-console.log(document.body.childNodes);
-
-//2.1 First NODE childs inside body
-console.log(document.body.firstChild);
-
-//2.1 Last NODE childs inside body
-console.log(document.body.lastChild);
-
-//3 Get the parent NODE element
-console.log(document.querySelector('#current').parentNode);
-
-//4. Use data-* attribute
-console.log(document.querySelector('[data-current="3"]'));
-
-//5. Use next NODE element
-console.log(document.querySelector('[data-current="3"]').nextSibling);
+window.addEventListener("DOMContentLoaded", () => {
+    const box = document.querySelector(".box");
 
 
-//6. Use previous NODE element
-console.log(document.querySelector('[data-current="3"]').previousSibling);
+    //1. touchstart
+    box.addEventListener('touchstart', (e) => {
+        console.log("Start");
+    });
 
-////////////////////////////////////
-//7. Use ELEMENT
-console.log("///////////////////////");
+    //2. touchmove
+    box.addEventListener('touchmove', (e) => {
+        console.log("Move");
+    });
 
+    //3. touchend
+    box.addEventListener('touchend', (e) => {
+        console.log("End");
+    });
 
-//7.1 Get the parent element
-console.log(document.querySelector('[data-current="3"]').parentElement);
+    //4. event touches
+    box.addEventListener('touchstart', (e) => {
+        console.log(e.touches); 
+        console.log(e.targetTouches);
+        console.log(e.changedTouches);
+    });
 
-//7.2 First child inside body
-console.log(document.body.firstElementChild);
+    //5. Practice event touches
+    box.addEventListener('touchmove', (e) => {
+        console.log(e.targetTouches[0].pageX);
+    });
 
-//7.3 Last child inside body
-console.log(document.body.lastElementChild);
-
-//7.4 Use previous element
-console.log(document.querySelector('[data-current="3"]').previousElementSibling);
-
-//7.5 Use next element
-console.log(document.querySelector('[data-current="3"]').nextElementSibling);
-
-////////////////////////////////////
-// 8. Use FOR/OF
-console.log("///////////////////////");
-////////////////////////////////////
-
-for (let node of document.body.childNodes) {
-    if (node.nodeName == '#text') {
-        continue;
-    }
-    console.log(node);
-}
+});
