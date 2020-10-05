@@ -24,3 +24,5 @@ console.log(olek.sayHello());
 const maxim = Object.create(olek);
 console.log(maxim.armor);
 console.log(maxim.health);
+
+//finish
